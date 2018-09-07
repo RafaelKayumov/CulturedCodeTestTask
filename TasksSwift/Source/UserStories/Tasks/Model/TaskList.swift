@@ -23,6 +23,11 @@ class TaskList {
     func sort() {
         tasks.sort { $0.title < $1.title }
     }
+
+    func indexForParentOfTask(_ task: Task) -> Int? {
+        guard let parent = task.parentTask else { return nil }
+        return tasks.index(ofElement: parent)
+    }
  }
 
 extension TaskList {

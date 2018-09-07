@@ -37,9 +37,10 @@ class AppCoordinator {
         return TasksTableViewController(tasks: tasks)
     }
 
-    static func pushTasksViewControllerWithTasks(_ tasks: [Task], title: String) {
+    static func pushTasksViewControllerWithTasks(_ tasks: [Task], title: String) -> TasksTableViewController  {
         let tasksViewController = TasksTableViewController(tasks: tasks)
         tasksViewController.title = title
         navigationController?.pushViewController(tasksViewController, animated: true)
+        return tasksViewController
     }
 }

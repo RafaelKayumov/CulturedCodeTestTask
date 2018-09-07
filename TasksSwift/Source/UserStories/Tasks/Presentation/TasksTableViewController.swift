@@ -11,9 +11,15 @@ import UIKit
 
 private let kTaskCellIdentifier = "TaskCell"
 
+protocol TasksTableViewControllerDelegate: AnyObject {
+
+    func tasksTableViewControllerDidSwitchCompletionForTask(_ task: Task)
+}
+
 class TasksTableViewController : UITableViewController {
 
     private var taskList = TaskList(tasks: [])
+    weak var delegate: TasksTableViewControllerDelegate?
 
     init(tasks: [Task]) {
         taskList = TaskList(tasks: tasks)
@@ -67,6 +73,7 @@ private extension TasksTableViewController {
         guard let task = taskList[index] else { return }
         task.switchCompleted()
         tableView.reloadRows(at: [indexPath], with: .automatic)
+        delegate?.tasksTableViewControllerDidSwitchCompletionForTask(task)
     }
 }
 
@@ -97,6 +104,19 @@ extension TasksTableViewController {
 
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         guard let task = taskList[indexPath.row], task.childrenTasks?.isEmpty == false else { return }
-        AppCoordinator.pushTasksViewControllerWithTasks(task.childrenTasks!, title: task.title)
+        let tasksViewController = AppCoordinator.pushTasksViewControllerWithTasks(task.childrenTasks!, title: task.title)
+        tasksViewController.delegate = self
+    }
+}
+
+extension TasksTableViewController: TasksTableViewControllerDelegate {
+
+    func tasksTableViewControllerDidSwitchCompletionForTask(_ task: Task) {
+        guard let index = taskList.indexForParentOfTask(task) else { return }
+        tableView.reloadRows(at: [IndexPath(item: index, section: 0)], with: .automatic)
+
+        if let delegate = self.delegate, let task = taskList[index] {
+            delegate.tasksTableViewControllerDidSwitchCompletionForTask(task)
+        }
     }
 }

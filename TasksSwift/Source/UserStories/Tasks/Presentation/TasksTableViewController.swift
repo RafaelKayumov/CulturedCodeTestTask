@@ -64,8 +64,8 @@ private extension TasksTableViewController {
     }
 
     @objc func sort() {
-        taskList.sort()
-        tableView.reloadData()
+        guard let repositions = taskList.sort() else { return }
+        tableView.performRepositions(repositions)
     }
 
     func toggleTaskForCellAtIndexPath(_ indexPath: IndexPath) {

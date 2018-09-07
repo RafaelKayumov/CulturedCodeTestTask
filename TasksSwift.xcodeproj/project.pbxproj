@@ -19,6 +19,9 @@
 		7827AF3E2141CCB50007A708 /* Array+Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7827AF3D2141CCB50007A708 /* Array+Index.swift */; };
 		7827AF422141CECB0007A708 /* TasksListMock.json in Resources */ = {isa = PBXBuildFile; fileRef = 7827AF412141CECB0007A708 /* TasksListMock.json */; };
 		7827AF442141D7220007A708 /* TaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7827AF432141D7220007A708 /* TaskList.swift */; };
+		7827AF4621429E000007A708 /* Array+Repositions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7827AF4521429E000007A708 /* Array+Repositions.swift */; };
+		7827AF482142A0380007A708 /* Task+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7827AF472142A0380007A708 /* Task+Hashable.swift */; };
+		7827AF4A2142A0EF0007A708 /* UITableView+Repositions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7827AF492142A0EF0007A708 /* UITableView+Repositions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +39,9 @@
 		7827AF3D2141CCB50007A708 /* Array+Index.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Index.swift"; sourceTree = "<group>"; };
 		7827AF412141CECB0007A708 /* TasksListMock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TasksListMock.json; sourceTree = "<group>"; };
 		7827AF432141D7220007A708 /* TaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskList.swift; sourceTree = "<group>"; };
+		7827AF4521429E000007A708 /* Array+Repositions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Repositions.swift"; sourceTree = "<group>"; };
+		7827AF472142A0380007A708 /* Task+Hashable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+Hashable.swift"; sourceTree = "<group>"; };
+		7827AF492142A0EF0007A708 /* UITableView+Repositions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Repositions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,16 +140,8 @@
 			children = (
 				7827AF332141C4720007A708 /* Constants */,
 				7827AF322141C46D0007A708 /* Extensions */,
-				7827AF312141C4690007A708 /* Utils */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		7827AF312141C4690007A708 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Utils;
 			sourceTree = "<group>";
 		};
 		7827AF322141C46D0007A708 /* Extensions */ = {
@@ -151,6 +149,8 @@
 			children = (
 				7827AF3B2141CB5A0007A708 /* Date+Formatting.swift */,
 				7827AF3D2141CCB50007A708 /* Array+Index.swift */,
+				7827AF4521429E000007A708 /* Array+Repositions.swift */,
+				7827AF492142A0EF0007A708 /* UITableView+Repositions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -168,6 +168,7 @@
 				03DF601220A1A6840055325C /* Task.swift */,
 				7827AF432141D7220007A708 /* TaskList.swift */,
 				7827AF392141C7590007A708 /* Task+Generate.swift */,
+				7827AF472142A0380007A708 /* Task+Hashable.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -261,6 +262,9 @@
 				03DF601520A1B15A0055325C /* TasksTableViewController.swift in Sources */,
 				03DF601320A1A6840055325C /* Task.swift in Sources */,
 				03DF601720A1B8350055325C /* TaskCell.swift in Sources */,
+				7827AF4621429E000007A708 /* Array+Repositions.swift in Sources */,
+				7827AF482142A0380007A708 /* Task+Hashable.swift in Sources */,
+				7827AF4A2142A0EF0007A708 /* UITableView+Repositions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

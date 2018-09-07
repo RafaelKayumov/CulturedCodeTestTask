@@ -20,8 +20,11 @@ class TaskList {
         tasks.forEach { $0.setCompleted(true) }
     }
 
-    func sort() {
-        tasks.sort { $0.title < $1.title }
+    func sort() -> [Reposition]? {
+        let sorted = tasks.sorted { $0.title < $1.title }
+        let repositions = tasks.repositionsWithNewArray(sorted)
+        tasks = sorted
+        return repositions
     }
 
     func indexForParentOfTask(_ task: Task) -> Int? {

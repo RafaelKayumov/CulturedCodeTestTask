@@ -17,7 +17,7 @@ class TaskList {
     }
 
     func completeAll() {
-        tasks.forEach { $0.completed = true }
+        tasks.forEach { $0.setCompleted(true) }
     }
 
     func sort() {

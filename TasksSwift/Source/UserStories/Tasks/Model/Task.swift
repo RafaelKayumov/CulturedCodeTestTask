@@ -107,6 +107,6 @@ extension Task {
     }
 
     var updatedAtString: String {
-        return updatedAt?.asString() ?? "not yet moidfied"
+        return updatedAt?.asString() ?? "not yet modified"
     }
 }

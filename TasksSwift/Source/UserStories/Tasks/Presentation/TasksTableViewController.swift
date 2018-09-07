@@ -14,21 +14,23 @@ private let kTaskCellIdentifier = "TaskCell"
 protocol TasksTableViewControllerDelegate: AnyObject {
 
     func tasksTableViewControllerDidSwitchCompletionForTask(_ task: Task)
+    func tasksTableViewControllerDidSwitchCompletionForTasks(_ tasks: [Task])
 }
 
 class TasksTableViewController : UITableViewController {
 
-    private var taskList = TaskList(tasks: [])
+    private var taskList: TaskList
     weak var delegate: TasksTableViewControllerDelegate?
 
     init(tasks: [Task]) {
         taskList = TaskList(tasks: tasks)
-
         super.init(style: .plain)
+        
+        title = "Tasks"
     }
 
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        fatalError("init(coder:) has not been implemented. Storyboard not supported")
     }
 
     override func viewDidLoad() {
@@ -36,17 +38,12 @@ class TasksTableViewController : UITableViewController {
 
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.size.width, height: 1))
 
-        setupTitle()
         setupToolbar()
         registerCells()
     }
 }
 
 private extension TasksTableViewController {
-
-    func setupTitle() {
-        title = "Tasks"
-    }
 
     func setupToolbar() {
         let completeAllItem = UIBarButtonItem(title: "complete all", style: .plain, target: self, action: #selector(completeAll))
@@ -61,6 +58,7 @@ private extension TasksTableViewController {
     @objc func completeAll() {
         taskList.completeAll()
         tableView.reloadData()
+        delegate?.tasksTableViewControllerDidSwitchCompletionForTasks(taskList.tasks)
     }
 
     @objc func sort() {
@@ -117,6 +115,20 @@ extension TasksTableViewController: TasksTableViewControllerDelegate {
 
         if let delegate = self.delegate, let task = taskList[index] {
             delegate.tasksTableViewControllerDidSwitchCompletionForTask(task)
+        }
+    }
+
+    func tasksTableViewControllerDidSwitchCompletionForTasks(_ tasks: [Task]) {
+        guard let parents = taskList.existingParentsForTasks(tasks) else { return }
+        let indexPaths = parents.compactMap { parent -> IndexPath? in
+            guard let index = taskList.tasks.index(of: parent) else { return nil }
+            return IndexPath(row: index, section: 0)
+        }
+
+        tableView.reloadRows(at: indexPaths, with: .automatic)
+
+        if let delegate = self.delegate {
+            delegate.tasksTableViewControllerDidSwitchCompletionForTasks(parents)
         }
     }
 }

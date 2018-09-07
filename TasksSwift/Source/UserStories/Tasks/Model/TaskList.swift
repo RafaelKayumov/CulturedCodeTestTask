@@ -31,6 +31,15 @@ class TaskList {
         guard let parent = task.parentTask else { return nil }
         return tasks.index(ofElement: parent)
     }
+
+    func existingParentsForTasks(_ tasks: [Task]) -> [Task]? {
+        guard tasks.isEmpty == false else { return nil }
+        let parents = tasks.reduce([Task]()) { (result: [Task], task: Task) -> [Task] in
+            guard let parent = task.parentTask, !result.contains(parent), self.tasks.contains(parent) else { return result }
+            return result + [parent]
+        }
+        return parents
+    }
  }
 
 extension TaskList {
